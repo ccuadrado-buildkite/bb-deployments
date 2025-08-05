@@ -10,7 +10,7 @@ setup () {
     local -
     set -x
 
-    { sudo fusermount -u "$fuse_dir_to_unmount" && sleep 1; } || true
+    { sudo fusermount3 -u "$fuse_dir_to_unmount" && sleep 1; } || true
     sudo rm -rf volumes/bb "volumes/${worker_fuse}" "volumes/${worker_hardlinking}"
 
     mkdir -p volumes
@@ -26,7 +26,7 @@ cleanup() {
     local -
     set -x
 
-    sudo fusermount -u "$fuse_dir_to_unmount" || true
+    sudo fusermount3 -u "$fuse_dir_to_unmount" || true
     exit "$EXIT_STATUS"
 }
 
@@ -41,4 +41,4 @@ else
 fi
 
 setup
-docker compose up "$@"
+docker-compose up "$@"
